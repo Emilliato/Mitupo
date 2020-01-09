@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">Mitupo</string>
     <string name="action_settings">Settings</string>
-  
+    <string name="about">
+    Totems are one of the core pillars of the african tradition, in Zimbabwe they are one of the few remaining cultural practices which are still being followed. 
+    It is controversial to point out the main reason why totems were introduced. We have more than twenty five totems before considering variations for each totem.
+    Such variations come due to different origins that may have their own way of praising. 
+    </string>
+
+  <string name="about_1">
+    This is an ongoing project that focuses on keeping our culture for future generations. If you know any other totem that is not on the list please send us an email with the
+    totem name (e.g Shumba Murambwi), where it originated from, short description and the actual praise to simpledevelopers92@gmail.com.
+  </string>
 </resources>

@@ -24,7 +24,7 @@
 
             <LinearLayout
             android:orientation="vertical"
-                android:background="@color/material_grey_100"
+            android:background="@color/material_grey_100"
             android:layout_width="match_parent" 
             android:padding="@dimen/fastscroll_default_thickness"
             android:layout_height="wrap_content">

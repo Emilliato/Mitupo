@@ -25,46 +25,40 @@ namespace Mitupo
     {
         //Data variables
         private List<Totem> totems ;
-        private IData apiConnect;
+
+        //private IData apiConnect;
 
         //Views and adapter for displaying data
         private RecyclerView mRecyclerView;
+
         private TotemRecyclerAdapter adapter;
+
         private LinearLayoutManager layoutManager;
 
         protected  override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
             SetContentView(Resource.Layout.activity_main);
 
             Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+
+            toolbar.Title = "Totems Home";
+
             SetSupportActionBar(toolbar);
+
             Initialize();
             
         }
-
+        
         private void Initialize()
         {
-            //For Refit
-            JsonConvert.DefaultSettings = () => new JsonSerializerSettings()
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                Converters =
-                {
-                    new StringEnumConverter()
-                }
-            };
-            //Used when connect to an API
-            apiConnect = RestService.For<IData>("https://totems.azurewebsites.net/totems");
             
             
-
-            //Reading data from local json file
             totems = GetAll(new ReadData().GetTotems());
-            ApiConnect();
-            //ApiConnect() function makes a request using the global interface object initialized above
-
+            
             //For views 
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.totems_list1);
 
@@ -77,25 +71,24 @@ namespace Mitupo
             mRecyclerView.SetLayoutManager(layoutManager);
 
             adapter = new TotemRecyclerAdapter(totems,this);
+
             mRecyclerView.SetAdapter(adapter);
 
 
         }
 
-        private void ShowToast(string v)
-        {
-            Toast.MakeText(this, v, ToastLength.Long).Show();
-        }
-
         private List<Totem> GetAll(IEnumerable<Totem> mTotems)
         {
-            List<Totem> mtotems = new List<Totem>();
+            List<Totem> m_Totems = new List<Totem>();
+
             foreach (var item in mTotems)
             {
-                mtotems.Add(item);
+                m_Totems.Add(item);
             }
-            return mtotems;
+
+            return m_Totems;
         }
+
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
@@ -113,18 +106,7 @@ namespace Mitupo
             return base.OnOptionsItemSelected(item);
         }
        
-        private async void ApiConnect()
-        {
-            try
-            {
-                List<Totem> mtotems = await apiConnect.GetTotems();
-                ShowToast(mtotems[0].Animal);
-            }
-            catch (Exception ex)
-            {
-                ShowToast("" + ex.Message);
-            }
-        }
+        
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -132,6 +114,6 @@ namespace Mitupo
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-	}
+    }
 }
 

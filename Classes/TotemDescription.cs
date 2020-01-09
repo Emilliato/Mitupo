@@ -20,7 +20,7 @@ using Mitupo.Models;
 
 namespace Mitupo.Classes
 {
-    [Activity(Label = "Totem Description", Theme = "@style/AppTheme.NoActionBar", MainLauncher = false)]
+    [Activity(Label = "Totem Description", Theme = "@style/AppTheme.NoActionBar", MainLauncher = false, ParentActivity= typeof(MainActivity))]
     public class TotemDescription : AppCompatActivity
     {
         //Create views 
@@ -77,6 +77,7 @@ namespace Mitupo.Classes
             base.OnBackPressed();
             //Destroy the activity when the use leaves the activity
             Finish();
+            
         }
     }
 }

@@ -26,6 +26,8 @@ namespace Mitupo.Models
 
         public TextView Description { get; set; }
 
+        public TextView ViewMore { get; set; }
+
         public  RecyclerViewHolder(View itemView): base(itemView)
         {
             ImageView = itemView.FindViewById<ImageView>(Resource.Id.totemImage);
@@ -34,6 +36,7 @@ namespace Mitupo.Models
 
             Description = itemView.FindViewById<TextView>(Resource.Id.totem_description);
 
+            ViewMore = itemView.FindViewById<TextView>(Resource.Id.totem_btn_view_more);
         }
        
     }
@@ -45,9 +48,9 @@ namespace Mitupo.Models
     {
         
 
-        private readonly List<Totem> mTotems;
+        private readonly  List<Totem> mTotems;
 
-        private readonly Activity _Context;
+        private  readonly Activity _Context;
 
         public TotemRecyclerAdapter(List<Totem> mTotems, Activity context)
         {
@@ -70,26 +73,26 @@ namespace Mitupo.Models
 
             Totem totem = mTotems[position];
 
+            //We use RecyclerViewHolder to access views
             RecyclerViewHolder viewHolder = holder as RecyclerViewHolder;
+            
+            //Set an Image first
+            viewHolder.ImageView.SetImageResource(ImageResource(totem.Animal.ToLower()));
 
-             
-            //viewHolder.mImageView
+            //For title
             StringBuilder builder = new StringBuilder("");
 
             builder.Append(totem.Animal).Append(" ").Append(totem.Id);
 
-            // Android.Net.Uri url = Android.Net.Uri.Parse(totem.Image);
-
-           // viewHolder.mImageView.SetImageURI(url);
-
-            viewHolder.ImageView.SetImageResource(ImageResource(totem.Animal.ToLower())); 
-
+            //Set title
             viewHolder.Tittle.Text = builder.ToString();
 
+            //Set Description
             viewHolder.Description.Text = SubString(totem.Description);
 
+           
             //Handle clicks on description
-            viewHolder.Description.Click += (sender, args) => 
+            viewHolder.ViewMore.Click += (sender, args) =>
             {
                 Intent intent = new Intent(_Context, typeof(TotemDescription));
 
@@ -99,21 +102,12 @@ namespace Mitupo.Models
 
             };
 
-            //Handle clicks on ImageView
-            viewHolder.ImageView.Click += (sender, args) => 
-            {
-                Intent intent = new Intent(_Context, typeof(TotemDescription));
-
-                intent.PutExtra("Totem", JsonConvert.SerializeObject(totem));
-
-                _Context.StartActivity(intent);
-
-            };
+            
 
         }
 
        
-        //Shorten the description to 25 words only
+        //Shorten the description to 25 words only 
         public string SubString(string description)
         {
             string[] allStrings = description.Split();
@@ -146,7 +140,11 @@ namespace Mitupo.Models
 
                 "shoko",
 
-                "soko"
+                "soko",
+
+                "humba",
+
+                "tembo"
             };
 
 
@@ -156,7 +154,10 @@ namespace Mitupo.Models
 
                 Resource.Drawable.soko,
 
-                Resource.Drawable.soko
+                Resource.Drawable.soko,
+                 Resource.Drawable.humba,
+
+                  Resource.Drawable.tembo
             };
 
             return totemIds[totemNames.IndexOf(totemName)];

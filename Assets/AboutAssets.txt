@@ -12,12 +12,25 @@ public class ReadAsset : Activity
 
         InputStream input = Assets.Open ("my_asset.txt");
     }
-}
+} 
 
 Additionally, some Android functions will automatically load asset files:
 
 Typeface tf = Typeface.CreateFromAsset (Context.Assets, "fonts/samplefont.ttf");
 
 16 Dec 2019 Work
-Finish handling clicks inside a REcyvler adapter
-Finish designing the Totem description views and make the class work. 
+Finish handling clicks inside a Recycler adapter
+Finish designing the Totem description views and make the class work.
+ 
+Feature 002 
+Finish up the styles 
+Added the functionality to show different images for different totems. 
+Added few more totems 
+Removed the ability to see more details by clicking images.
+
+New Feature. 003
+Create the About page of your application
+Show the references and link to the API.
+Description of the Idea.
+
+
